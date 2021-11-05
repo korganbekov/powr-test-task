@@ -1,19 +1,5 @@
 'use strict';
 
-//const pgp = require('pg-promise')(/* initialization options */);
-
-/*
-const cn = {
-    host: 'localhost', // server name or IP address;
-    port: 5432,
-    database: 'mydb',
-    user: 'postgres',
-    password: '12345'
-};
-
-const db = pgp(cn); // database instance;
-*/
-
 const { Client } = require('pg');
 /*
 const client = new Client({
@@ -24,6 +10,7 @@ const client = new Client({
     port: 5432,
 });
 */
+
 const client = new Client({
     user: 'fdjzoyctivydpu',
     host: 'ec2-34-202-66-20.compute-1.amazonaws.com',
@@ -31,74 +18,24 @@ const client = new Client({
     password: '28a413ba929ed56e355657308cc965e278c279b72a02e66d7f020a63edd3bd24',
     port: 5432,
 });
+
 client.connect();
 
-/*
-const query = `
-CREATE TABLE users (
-    email varchar,
-    firstName varchar,
-    lastName varchar,
-    age int
-);
-`;
-
-client.query(query, (err, res) => {
-    if (err) {
-        console.error(err);
-        return;
-    }
-    console.log('Table is successfully created');
-    client.end();
-});
-*/
-/*
-const query = `
-INSERT INTO users (email, firstName, lastName, age)
-VALUES ('johndoe@gmail.com', 'john', 'doe', 21)
-`;
-client.query(query, (err, res) => {
-    if (err) {
-        console.error(err);
-        return;
-    }
-    console.log('Data insert successful');
-    client.end();
-});
-*/
-/*
-const query = `
-CREATE TABLE boxes (
+const queryCreateBoxes = `
+CREATE TABLE IF NOT EXISTS boxes (
+    id SERIAL PRIMARY KEY,
     json_string varchar
-
 );
 `;
 
-client.query(query, (err, res) => {
+client.query(queryCreateBoxes, (err, res) => {
     if (err) {
         console.error(err);
         return;
     }
-    console.log('Table is successfully created');
-    client.end();
-});
-*/
-/*
-const query1 = `
-INSERT INTO boxes (json_string)
-VALUES ('121212')
-`;
-client.query(query1, (err, res) => {
-    if (err) {
-        console.error(err);
-        return;
-    }
-    console.log('Data insert successful');
+    console.log('table boxes is created');
     //client.end();
 });
-*/
-
-
 
 
 
@@ -112,7 +49,7 @@ var staticPath = path.join(__dirname, '/');
 app.use(express.static(path.join(__dirname, 'build')));
 
 // Allows you to set port in the project properties.
-app.set('port', process.env.PORT || 5000);
+app.set('port', process.env.PORT || 8080);
  // здесь у нас происходит импорт пакетов и определяется порт нашего сервера
 //  app.use(favicon(__dirname + '/build/favicon.png')); 
  
@@ -126,18 +63,21 @@ app.get('/ping', function (req, res) {
 const value = req.query.value;
 const id = Math.floor(Math.random() * 1000);
 const query2 = `
-INSERT INTO boxes (id, json_string)
-VALUES (${id}, '${value}')
+INSERT INTO boxes (json_string)
+VALUES ('${value}')
 `;
-client.query(query2, (err, res) => {
+client.query(query2, (err, result) => {
     if (err) {
         console.error(err);
         return;
     }
     console.log('Data insert successful');
-    //client.end();
+    console.log('Get data successful');
+    console.log('result', result.rows);
+    res.status(200);
+    return res.send(result.rows);
 });
-    return res.send(value);
+    //return res.send(value);
 });
 
 app.get('/box', function (req, res) {
@@ -146,14 +86,7 @@ app.get('/box', function (req, res) {
     const query2 = `
         SELECT * FROM boxes WHERE id = ${id} 
     `;
-/*
-    const result = client.query({
-        rowMode: 'array',
-        //text: 'SELECT 1 as one, 2 as two;',
-        text: `SELECT * FROM boxes WHERE id = ${id} as result1`
-      })
-      console.log(result.rows) // [ [ 1, 2 ] ]
-*/
+
     client.query(query2, (err, result) => {
         if (err) {
             console.error(err);
@@ -178,4 +111,24 @@ app.get('/*', function (req, res) {
 
 var server = app.listen(app.get('port'), function() {
     console.log('listening');
+});
+
+const queryCustomers = `
+CREATE TABLE IF NOT EXISTS customers 
+(
+    Id SERIAL PRIMARY KEY,
+    FirstName CHARACTER VARYING(30),
+    LastName CHARACTER VARYING(30),
+    Email CHARACTER VARYING(30),
+    Age INTEGER
+);
+`
+
+client.query(queryCustomers, (err, res) => {
+    if (err) {
+        console.error(err);
+        return;
+    }
+    console.log('Table customers is created');
+    //client.end();
 });

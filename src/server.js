@@ -119,6 +119,7 @@ app.set('port', process.env.PORT || 5000);
  app.use(express.static(__dirname));
  app.use(express.static(path.join(__dirname, 'build')));
 
+
 //простой тест сервера
 app.get('/ping', function (req, res) {
 const value = req.query.value;

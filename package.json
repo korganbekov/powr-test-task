@@ -25,7 +25,7 @@
   },
   "scripts": {
     "start": "node src/server.js",
-    "build": "react-scripts src/build",
+    "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "postinstall": "npm run build"

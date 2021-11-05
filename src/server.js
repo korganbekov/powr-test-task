@@ -15,12 +15,20 @@ const db = pgp(cn); // database instance;
 */
 
 const { Client } = require('pg');
-
+/*
 const client = new Client({
     user: 'postgres',
     host: 'localhost',
     database: 'mydb',
     password: '12345',
+    port: 5432,
+});
+*/
+const client = new Client({
+    user: 'fdjzoyctivydpu',
+    host: 'ec2-34-202-66-20.compute-1.amazonaws.com',
+    database: 'd4s2s6rvijmk3j',
+    password: '28a413ba929ed56e355657308cc965e278c279b72a02e66d7f020a63edd3bd24',
     port: 5432,
 });
 client.connect();

@@ -108,7 +108,8 @@ var express = require('express');
 var app = express();
 
 var staticPath = path.join(__dirname, '/');
-app.use(express.static(staticPath));
+//app.use(express.static(staticPath));
+app.use(express.static(path.join(__dirname, 'build')));
 
 // Allows you to set port in the project properties.
 app.set('port', process.env.PORT || 5000);
@@ -171,8 +172,8 @@ app.get('/box', function (req, res) {
 
 //обслуживание html
 app.get('/*', function (req, res) {
-    //res.sendFile(path.join(__dirname, 'build', 'index.html'));
-    res.sendFile(path.join(__dirname, '../public/index.html'));
+    /res.sendFile(path.join(__dirname, 'build', 'index.html'));
+    //res.sendFile(path.join(__dirname, '../public/index.html'));
 });
 
 var server = app.listen(app.get('port'), function() {

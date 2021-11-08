@@ -4,26 +4,6 @@
 const { Client } = require('pg');
 // const { connectionString } = credentials.postgresHome;
 
-
-const cs = {
-    user: 'fdjzoyctivydpu',
-    host: 'ec2-34-202-66-20.compute-1.amazonaws.com',
-    database: 'd4s2s6rvijmk3j',
-    password: '28a413ba929ed56e355657308cc965e278c279b72a02e66d7f020a63edd3bd24',
-    port: 5432,
-    ssl: {
-        require: true,
-        rejectUnauthorized: false
-    }
-}
-
-// let stroka = JSON.stringify(connectionString);
-
-
-//const client = new Client({ stroka });
-// client.connect();
-
-
 /*
 const client = new Client({
     user: 'postgres',
@@ -48,23 +28,6 @@ const client = new Client({
     }
 });
 client.connect();
-
-/*
-//isilo.db.elephantsql.com (isilo-01)
-const client = new Client({
-    user: 'fdjzoyctivydpu',
-    host: 'isilo.db.elephantsql.com',
-    database: 'stgpjwmm',
-    password: 'zpKt1B8wHmz_35Y69sCQBR1qzacXhvMi',
-    port: 5432,
-    ssl: {
-        require: true,
-        rejectUnauthorized: false
-    }
-});
-client.connect();
-*/
-
 
 const queryCreateBoxes = `
 CREATE TABLE IF NOT EXISTS boxes (

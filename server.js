@@ -111,11 +111,15 @@ client.query(query2, (err, result) => {
         console.error(err);
         return;
     }
-    console.log('Data insert successful');
-    console.log('Get data successful');
-    console.log('result', result.rows);
-    res.status(200);
-    return res.send(result.rows);
+    try {
+        console.log('Data insert successful');
+        console.log('Get data successful');
+        console.log('result', result.rows);
+        res.status(200);
+        return res.send(result.rows);
+    } catch (e) {
+        
+    }
 });
     return res.send(value);
 });
@@ -132,11 +136,15 @@ app.get('/save', function(req, res) {
             console.error(err);
             return;
         }
-        console.log('Data insert successful');
-        console.log('Get data successful');
-        console.log('result', result.rows);
-        res.status(200);
-        return res.send(result.rows);
+        try {
+            console.log('Data insert successful');
+            console.log('Get data successful');
+            console.log('result', result.rows);
+            res.status(200);
+            return res.send(result.rows);
+        } catch (e) {
+
+        }
     });
         return res.send(value);
     });

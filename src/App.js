@@ -1,10 +1,13 @@
 import React, { useState, useContext, useEffect } from 'react';
+import { useHistory ,useLocation } from 'react-router-dom';
 import './App.css';
 import ContainerComponent from './components/container';
 import BoxComponent from './components/box'
 import ColorPickerComponent from './components/color-picker';
 import { PositionContext, ItemsContext } from './context';
 import { getThemeProps } from '@mui/system';
+import axios from 'axios';
+
 
 
 let init = `{"type":"container", "items": [{"type":"box"}, {"type":"container", "items": [{"type":"box","color":"green"},{"type":"box","color":"green"}]}]}`;
@@ -13,7 +16,7 @@ const App = () => {
   const [context, setContext] = useState({ X:0, Y:0, open: false });
   const [items, setItems] = useState([{ id: 9999, type: "container", items: [] }]);
   const [element, setElement] = useState(null);
-
+  
   const [color, setColor] = useState("orange");
   const [search , setSearch] = useState(999);
   const [jsonObj, setObj] = useState(null);
@@ -200,8 +203,12 @@ const App = () => {
   }
 
   const save = () => {
-
+    const el = document.getElementById("divjson");
+    // const json = JSON.stringify(jsonObj);
+    axios.get(`${window.location.href}/save?value=${el.innerHTML}`)
+      .then(res=>console.log(res));
   }
+
   return (
     <ItemsContext.Provider value={[items, setItems]}>
       <PositionContext.Provider value={[context, setContext]}>
@@ -261,7 +268,8 @@ const App = () => {
           <section>
             <h2 style={{textAlign: "center"}}>Part 3</h2>
             <button onClick={()=>arrayToJson()}>Create JSON</button>
-            <div>JSON:<br /> {JSON.stringify(jsonObj)}</div>
+            <div id="divjson">JSON:<br /> {JSON.stringify(jsonObj)}</div>
+            <button onClick={() => save()}>SAVE</button>
           </section>
         </div>
       </PositionContext.Provider>

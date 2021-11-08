@@ -118,7 +118,7 @@ client.query(query2, (err, result) => {
         res.status(200);
         return res.send(result.rows);
     } catch (e) {
-        
+
     }
 });
     return res.send(value);
@@ -197,6 +197,30 @@ app.get('/boxes', function (req, res) {
 
 
 //обслуживание html
+app.get('/app_id', function (req, res) {
+    const id = req.query.id;
+    
+    const query2 = `
+        SELECT * FROM boxes WHERE id = ${id} 
+    `;
+
+    client.query(query2, (err, result) => {
+        if (err) {
+            console.error(err);
+            return;
+        }
+        try {
+            console.log('Get data successful');
+            console.log('result', result.rows);
+            res.status(200);
+            return res.send(result.rows);
+        } catch (e) {
+
+        }
+        
+    });
+});
+
 app.get('/*', function (req, res) {
     res.sendFile(path.join(__dirname, 'build', 'index.html'));
     //res.sendFile(path.join(__dirname, '../public/index.html'));
@@ -205,4 +229,3 @@ app.get('/*', function (req, res) {
 var server = app.listen(app.get('port'), function() {
     console.log('listening');
 });
- 

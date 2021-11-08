@@ -91,8 +91,8 @@ const App = () => {
       // setChildren([...children, el]);
       renderPart2(el)
       const parentHtmlEl = document.getElementById(id);
-console.log(parentHtmlEl);
-// return;
+      console.log(parentHtmlEl);
+      // return;
 
       _el.items.map(item=>{
        parentHtmlEl.append(item.id);
@@ -150,9 +150,9 @@ console.log(parentHtmlEl);
     })
   }
 
-const newGetElement = () => {
-  setElement(items.filter(el=>el.id == search)[0]);
-}
+  const newGetElement = () => {
+    setElement(items.filter(el=>el.id == search)[0]);
+  }
 
   const getElement = (obj) => {
     if (obj instanceof Object){
@@ -199,6 +199,9 @@ const newGetElement = () => {
     setObj(obj);
   }
 
+  const save = () => {
+
+  }
   return (
     <ItemsContext.Provider value={[items, setItems]}>
       <PositionContext.Provider value={[context, setContext]}>

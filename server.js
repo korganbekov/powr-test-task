@@ -17,7 +17,7 @@ const cs = {
     }
 }
 
-let stroka = JSON.stringify(connectionString);
+// let stroka = JSON.stringify(connectionString);
 
 
 //const client = new Client({ stroka });

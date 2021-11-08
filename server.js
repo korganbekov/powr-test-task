@@ -120,7 +120,7 @@ client.query(query2, (err, result) => {
     return res.send(value);
 });
 
-app.get('save', function(req, res) {
+app.get('/save', function(req, res) {
     const value = req.query.value;
     const id = Math.floor(Math.random() * 1000);
     const query2 = `

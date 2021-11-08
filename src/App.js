@@ -202,9 +202,9 @@ const App = () => {
     setObj(obj);
   }
 
-  const save = () => {
+  const save = (obj) => {
     const el = document.getElementById("divjson");
-    // const json = JSON.stringify(jsonObj);
+    const json = JSON.stringify(obj);
     axios.get(`${window.location.href}/save?value=${el.innerHTML}`)
       .then(res=>console.log(res));
   }
@@ -269,7 +269,7 @@ const App = () => {
             <h2 style={{textAlign: "center"}}>Part 3</h2>
             <button onClick={()=>arrayToJson()}>Create JSON</button>
             <div id="divjson">JSON:<br /> {JSON.stringify(jsonObj)}</div>
-            <button onClick={() => save()}>SAVE</button>
+            <button onClick={() => save(jsonObj)}>SAVE</button>
           </section>
         </div>
       </PositionContext.Provider>

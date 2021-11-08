@@ -1,8 +1,8 @@
 'use strict';
-const { credentials } = require('./config.js');
+// const { credentials } = require('./config.js');
 
 const { Client } = require('pg');
-const { connectionString } = credentials.postgresHome;
+// const { connectionString } = credentials.postgresHome;
 
 
 const cs = {
@@ -23,8 +23,6 @@ let stroka = JSON.stringify(connectionString);
 //const client = new Client({ stroka });
 // client.connect();
 
-
-const cookieParser = require('cookie-parser');
 
 /*
 const client = new Client({
@@ -50,7 +48,6 @@ const client = new Client({
     }
 });
 client.connect();
-
 
 /*
 //isilo.db.elephantsql.com (isilo-01)
@@ -95,7 +92,7 @@ app.use(express.static(__dirname));
 app.use(express.static(path.join(__dirname, 'build')));
  // здесь у нас происходит импорт пакетов и определяется порт нашего сервера
 //  app.use(favicon(__dirname + '/build/favicon.png'));
-app.use(cookieParser(credentials.cookieSecret)) 
+// app.use(cookieParser(credentials.cookieSecret)) 
  
 
 // Allows you to set port in the project properties.

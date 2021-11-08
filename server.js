@@ -197,8 +197,8 @@ app.get('/boxes', function (req, res) {
 
 
 //обслуживание html
-app.get('/app_id', function (req, res) {
-    const id = req.query.id;
+app.get('/app_id/:id', function (req, res) {
+    const id = req.params.id;
     
     const query2 = `
         SELECT * FROM boxes WHERE id = ${id} 

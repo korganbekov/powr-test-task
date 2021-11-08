@@ -12,7 +12,7 @@ import axios from 'axios';
 
 let init = `{"type":"container", "items": [{"type":"box"}, {"type":"container", "items": [{"type":"box","color":"green"},{"type":"box","color":"green"}]}]}`;
 
-const App = () => {
+const App = ({text_json}) => {
   const [context, setContext] = useState({ X:0, Y:0, open: false });
   const [items, setItems] = useState([{ id: 9999, type: "container", items: [] }]);
   const [element, setElement] = useState(null);

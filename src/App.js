@@ -179,15 +179,17 @@ const App = () => {
     if(!obj.items)
       obj.items = [];
     
-    const currentArr = items.filter(el => el.parentId == obj.id);
+    const currentArr = arr.filter(el => el.parentId == obj.id);
+    // let _doneArr = [..._doneArr, ...currentArr];
+    let nextArr = arr.filter(ar => !currentArr.find(rm => (rm.id === ar.id) ))
     
     currentArr.forEach((item) => {
       // if(obj.items.filter(el=>el.id==item.id).length===0){
-        if(item.type === 'box'){
+        if(item.type === 'box') {
           obj.items.push(item);
         }
         else if (item.type === 'container') {
-          let _obj = doneArr(item);
+          let _obj = doneArr(item, nextArr);
           obj.items.push(item);
         }
       // }
@@ -204,8 +206,9 @@ const App = () => {
 
   const save = (obj) => {
     const el = document.getElementById("divjson");
-    const json = JSON.stringify(obj);
-    axios.get(`${window.location.href}/save?value=${el.innerHTML}`)
+    let json = obj ? JSON.stringify(obj) : `"{"type":"container", "items": [{"type":"box"}, {"type":"container", "items": [{"type":"box","color":"green"},{"type":"box","color":"green"}]}]}"`;
+    let url = `/save?value=${json}`;
+    axios.get(url)
       .then(res=>console.log(res));
   }
 
